@@ -8,6 +8,7 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../constant/color/colors.dart';
 import '../constant/sizedbox/sizedbox.dart';
 import '../home/home_screen.dart';
+import '../onboarding/onboarding.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -16,8 +17,8 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Timer(
       const Duration(seconds: 5),
-      () => Get.to(
-        () => const HomeScreen(),
+      () => Get.offAll(
+        () => WithBuilder(),
       ),
     );
     return Scaffold(
