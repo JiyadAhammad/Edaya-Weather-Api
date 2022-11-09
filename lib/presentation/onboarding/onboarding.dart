@@ -2,8 +2,10 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
 
+import '../constant/color/colors.dart';
 import '../home/home_screen.dart';
 
 class ItemData {
@@ -22,8 +24,10 @@ class ItemData {
 }
 
 class WithBuilder extends StatefulWidget {
+  const WithBuilder({super.key});
+
   @override
-  _WithBuilder createState() => _WithBuilder();
+  State<WithBuilder> createState() => _WithBuilder();
 }
 
 class _WithBuilder extends State<WithBuilder> {
@@ -33,16 +37,41 @@ class _WithBuilder extends State<WithBuilder> {
   // final  liquidController = LiquidController();
 
   List<ItemData> data = <ItemData>[
-    ItemData(Colors.blue, 'asset/image/icons8-rainbow-48.png', 'Hi', "It's Me",
-        'Sahdeep'),
-    ItemData(Colors.deepPurpleAccent, 'asset/image/icons8-rainbow-48.png',
-        'Take a', 'Look At', 'Liquid Swipe'),
-    ItemData(Colors.green, 'asset/image/icons8-rainbow-48.png', 'Liked?',
-        'Fork!', 'Give Star!'),
-    ItemData(Colors.yellow, 'asset/image/icons8-rainbow-48.png', 'Can be',
-        'Used for', 'Onboarding design'),
-    ItemData(Colors.red, 'asset/image/icons8-cloud-lightning-48.png', 'Do',
-        'try it', 'Thank you'),
+    ItemData(
+      Colors.blue,
+      'asset/image/icons8-rainbow-48.png',
+      'Hi',
+      "It's Me",
+      'JIYAD',
+    ),
+    ItemData(
+      Colors.cyan,
+      'asset/image/icons8-rainbow-48.png',
+      'Take a',
+      'Look At',
+      'Liquid Swipe',
+    ),
+    ItemData(
+      Colors.green,
+      'asset/image/icons8-rainbow-48.png',
+      'Liked?',
+      'Fork!',
+      'Give Star!',
+    ),
+    ItemData(
+      Colors.yellow,
+      'asset/image/icons8-rainbow-48.png',
+      'Can be',
+      'Used for',
+      'Onboarding design',
+    ),
+    ItemData(
+      Colors.red,
+      'asset/image/icons8-cloud-lightning-48.png',
+      'Do',
+      'try it',
+      'Thank you',
+    ),
   ];
 
   @override
@@ -100,15 +129,27 @@ class _WithBuilder extends State<WithBuilder> {
                       children: <Widget>[
                         Text(
                           data[index].text1,
-                          // style: WithPages.style,
+                          style: GoogleFonts.montserrat(
+                            color: Colors.primaries[index + 1][600],
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         Text(
                           data[index].text2,
-                          // style: WithPages.style,
+                          style: GoogleFonts.montserrat(
+                            color: Colors.primaries[index + 3][900],
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         Text(
                           data[index].text3,
-                          // style: WithPages.style,
+                          style: GoogleFonts.montserrat(
+                            color: Colors.primaries[index][900],
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ],
                     ),
@@ -141,21 +182,33 @@ class _WithBuilder extends State<WithBuilder> {
               padding: const EdgeInsets.all(25.0),
               child: liquidController!.currentPage != 4
                   ? ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: kblack,
+                      ),
                       onPressed: () {
-                        print('${data.length} lenght in if condition');
                         liquidController!.animateToPage(
-                            page: data.length - 1, duration: 700);
+                          page: data.length - 1,
+                          duration: 700,
+                        );
                       },
                       child: const Text('Skip to End'),
                     )
                   : ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: kblack,
+                        minimumSize: const Size.fromHeight(50),
+                      ),
                       onPressed: () {
-                        print('${data.length} lenght in else condition');
                         Get.offAll(
                           () => const HomeScreen(),
                         );
                       },
-                      child: const Text('Conutnine'),
+                      child: Text(
+                        'Continue to Home',
+                        style: GoogleFonts.poppins(
+                          fontSize: 20,
+                        ),
+                      ),
                     ),
             ),
           ),
@@ -163,16 +216,22 @@ class _WithBuilder extends State<WithBuilder> {
             alignment: Alignment.bottomLeft,
             child: Padding(
               padding: const EdgeInsets.all(25.0),
-              child: ElevatedButton(
-                onPressed: () {
-                  print('${liquidController!.currentPage} in next condition');
-                  liquidController!.jumpToPage(
-                      page: liquidController!.currentPage + 1 > data.length - 1
-                          ? 0
-                          : liquidController!.currentPage + 1);
-                },
-                child: const Text('Next'),
-              ),
+              child: liquidController!.currentPage != 4
+                  ? ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: kblack,
+                      ),
+                      onPressed: () {
+                        liquidController!.jumpToPage(
+                          page: liquidController!.currentPage + 1 >
+                                  data.length - 1
+                              ? 0
+                              : liquidController!.currentPage + 1,
+                        );
+                      },
+                      child: const Text('Next'),
+                    )
+                  : const SizedBox(),
             ),
           )
         ],
@@ -180,7 +239,7 @@ class _WithBuilder extends State<WithBuilder> {
     );
   }
 
-  pageChangeCallback(int lpage) {
+  dynamic pageChangeCallback(int lpage) {
     setState(() {
       page = lpage;
     });
