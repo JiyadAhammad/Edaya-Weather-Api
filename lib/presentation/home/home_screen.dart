@@ -3,7 +3,9 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../constant/color/colors.dart';
 import '../constant/sizedbox/sizedbox.dart';
+import '../splash/splash_screen.dart';
 import 'widget/main_container_widget.dart';
+import 'widget/weather_details_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -13,68 +15,49 @@ class HomeScreen extends StatelessWidget {
     final double width = MediaQuery.of(context).size.width;
     final double height = MediaQuery.of(context).size.height;
     return Scaffold(
+      extendBodyBehindAppBar: true,
       body: SafeArea(
-        child: Container(
+        child: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               MainDeatilContinerWidget(
                 height: height,
                 width: width,
               ),
               kheight,
-              Expanded(
-                child: Column(
-                  children: [
-                    Text(
-                      'Weather Deatils',
-                      style: GoogleFonts.poppins(
-                        color: kwhite,
-                        fontSize: 30,
+              const MainHeadWidget(head: 'Weather Deatils'),
+              kheight5,
+              SizedBox(
+                height: width * .4,
+                width: double.infinity,
+                child: ListView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 6,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: Container(
+                        height: 100,
+                        width: 100,
+                        decoration: backgrounColor(),
+                        child: const Card(
+                          color: ktransparent,
+                          child: WeatherDetailsWidget(
+                            content: 'khdfjl',
+                            value: 'dfsksjl',
+                          ),
+                        ),
                       ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: const <Widget>[
-                        WeatherDetailsWidget(
-                          content: 'Feels like',
-                          value: '15°',
-                        ),
-                        WeatherDetailsWidget(
-                          content: 'Humidity',
-                          value: '67 %',
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: const <Widget>[
-                        WeatherDetailsWidget(
-                          content: 'uvi',
-                          value: '15°',
-                        ),
-                        WeatherDetailsWidget(
-                          content: 'wind_deg',
-                          value: '67 %',
-                        ),
-                      ],
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: const <Widget>[
-                        WeatherDetailsWidget(
-                          content: 'visibility',
-                          value: '15°',
-                        ),
-                        WeatherDetailsWidget(
-                          content: 'pressure',
-                          value: '67 %',
-                        ),
-                      ],
-                    ),
-                  ],
+                    );
+                  },
                 ),
-              )
+              ),
+              kheight,
+              const MainHeadWidget(head: 'Today'),
+              kheight5,
             ],
           ),
         ),
@@ -83,38 +66,25 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class WeatherDetailsWidget extends StatelessWidget {
-  const WeatherDetailsWidget({
+class MainHeadWidget extends StatelessWidget {
+  const MainHeadWidget({
     super.key,
-    required this.content,
-    required this.value,
+    required this.head,
   });
 
-  final String content;
-  final String value;
+  final String head;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        kheight20,
-        Text(
-          content,
-          style: GoogleFonts.poppins(
-            color: kwhite,
-            fontSize: 18,
-          ),
+    return Padding(
+      padding: const EdgeInsets.only(left: 20),
+      child: Text(
+        head,
+        style: GoogleFonts.poppins(
+          color: kwhite,
+          fontSize: 30,
         ),
-        kheight,
-        Text(
-          value,
-          style: GoogleFonts.poppins(
-            color: kwhite,
-            fontWeight: FontWeight.bold,
-            fontSize: 22,
-          ),
-        ),
-      ],
+      ),
     );
   }
 }
