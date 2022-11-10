@@ -2,10 +2,13 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../main.dart';
 import '../constant/color/colors.dart';
 import '../constant/sizedbox/sizedbox.dart';
 import '../home/home_screen.dart';
+import '../weatherreport/weather_report.dart';
 import 'widget/text_form_widget.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -23,7 +26,7 @@ class LoginScreen extends StatelessWidget {
       body: Form(
         key: formKey,
         child: ListView(
-          padding:const EdgeInsets.symmetric(
+          padding: const EdgeInsets.symmetric(
             vertical: 100,
           ),
           children: <Widget>[
@@ -85,7 +88,7 @@ class LoginScreen extends StatelessWidget {
                   },
                   child: const Text(
                     'Log In',
-                    style:  TextStyle(
+                    style: TextStyle(
                       color: kwhiteText,
                       fontSize: 20,
                     ),
@@ -107,8 +110,11 @@ class LoginScreen extends StatelessWidget {
     const String userPassword = 'Test@123456';
     if (formKey.currentState!.validate()) {
       if (email == userEmail && password == userPassword) {
+        final SharedPreferences sharedpreferen =
+            await SharedPreferences.getInstance();
+        await sharedpreferen.setBool(SAVE_NAME, true);
         await Get.offAll(
-          () => const HomeScreen(),
+          () => HomeScreen(),
         );
       }
     }

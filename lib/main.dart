@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'presentation/constant/color/colors.dart';
 import 'presentation/splash/splash_screen.dart';
 
+const String SAVE_NAME = 'logedin';
+
 void main() {
   runApp(const MyApp());
 }

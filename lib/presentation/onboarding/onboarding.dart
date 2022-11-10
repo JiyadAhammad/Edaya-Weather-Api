@@ -6,7 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
 
 import '../constant/color/colors.dart';
-import '../home/home_screen.dart';
+import '../weatherreport/weather_report.dart';
 import '../login/login_screen.dart';
 import 'widget/onboarding_container.dart';
 
@@ -25,14 +25,14 @@ class ItemData {
   final String text3;
 }
 
-class WithBuilder extends StatefulWidget {
-  const WithBuilder({super.key});
+class OnBoardingScreen extends StatefulWidget {
+  const OnBoardingScreen({super.key});
 
   @override
-  State<WithBuilder> createState() => _WithBuilder();
+  State<OnBoardingScreen> createState() => _OnBoardingScreen();
 }
 
-class _WithBuilder extends State<WithBuilder> {
+class _OnBoardingScreen extends State<OnBoardingScreen> {
   int page = 0;
   LiquidController? liquidController;
   UpdateType? updateType;
@@ -161,7 +161,7 @@ class _WithBuilder extends State<WithBuilder> {
                       ),
                       onPressed: () {
                         Get.offAll(
-                          () =>  LoginScreen(),
+                          () => LoginScreen(),
                         );
                       },
                       child: Text(

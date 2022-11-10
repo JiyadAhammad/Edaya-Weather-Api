@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../main.dart';
 import '../constant/color/colors.dart';
 import '../constant/sizedbox/sizedbox.dart';
 import '../home/home_screen.dart';
@@ -15,12 +17,7 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Timer(
-      const Duration(seconds: 5),
-      () => Get.offAll(
-        () => WithBuilder(),
-      ),
-    );
+    loggedIn();
     return Scaffold(
       body: Container(
         decoration: backgrounColor(),
@@ -50,6 +47,26 @@ class SplashScreen extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Future<void> loggedIn() async {
+    final SharedPreferences sharedpreferen =
+        await SharedPreferences.getInstance();
+    final bool? logedin = sharedpreferen.getBool(SAVE_NAME);
+    if (logedin == null || logedin == false) {
+      login();
+    } else {
+      Get.to(() => HomeScreen());
+    }
+  }
+
+  void login() {
+    Timer(
+      const Duration(seconds: 5),
+      () => Get.offAll(
+        () => const OnBoardingScreen(),
       ),
     );
   }
