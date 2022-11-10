@@ -7,6 +7,8 @@ import 'package:liquid_swipe/liquid_swipe.dart';
 
 import '../constant/color/colors.dart';
 import '../home/home_screen.dart';
+import '../login/login_screen.dart';
+import 'widget/onboarding_container.dart';
 
 class ItemData {
   ItemData(
@@ -111,50 +113,9 @@ class _WithBuilder extends State<WithBuilder> {
           LiquidSwipe.builder(
             itemCount: data.length,
             itemBuilder: (BuildContext context, int index) {
-              return Container(
-                width: double.infinity,
-                color: data[index].color,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    Image.asset(
-                      data[index].image,
-                      height: 200,
-                      fit: BoxFit.contain,
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.all(20.0),
-                    ),
-                    Column(
-                      children: <Widget>[
-                        Text(
-                          data[index].text1,
-                          style: GoogleFonts.montserrat(
-                            color: Colors.primaries[index + 1][600],
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          data[index].text2,
-                          style: GoogleFonts.montserrat(
-                            color: Colors.primaries[index + 3][900],
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          data[index].text3,
-                          style: GoogleFonts.montserrat(
-                            color: Colors.primaries[index][900],
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+              return OnBoardingContainerWidget(
+                data: data,
+                index: index,
               );
             },
             slideIconWidget: const Icon(Icons.arrow_back_ios),
@@ -200,11 +161,11 @@ class _WithBuilder extends State<WithBuilder> {
                       ),
                       onPressed: () {
                         Get.offAll(
-                          () => const HomeScreen(),
+                          () =>  LoginScreen(),
                         );
                       },
                       child: Text(
-                        'Continue to Home',
+                        'Continue to Login',
                         style: GoogleFonts.poppins(
                           fontSize: 20,
                         ),
