@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 
+import '../../../domain/user/user.dart';
+import '../../../main.dart';
 import '../../constant/color/colors.dart';
 import '../home_screen.dart';
 
 class DeleteAlertWidget extends StatelessWidget {
   const DeleteAlertWidget({
     super.key,
+    required this.id,
+    required this.index,
+    required this.data,
   });
-
+  final int? id;
+  final int index;
+  final data;
   @override
   Widget build(BuildContext context) {
     return IconButton(
@@ -29,7 +37,9 @@ class DeleteAlertWidget extends StatelessWidget {
           textConfirm: 'Ok',
           confirmTextColor: kblack,
           onConfirm: () {
-            Get.offAll(HomeScreen());
+            Get.back();
+            userDb.delete(id);
+            data.removeAt(index);
             Get.snackbar(
               'title',
               'message',

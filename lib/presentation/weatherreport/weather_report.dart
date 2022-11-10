@@ -47,7 +47,8 @@ class WeatherReport extends StatelessWidget {
               // ignore: use_build_context_synchronously
               Navigator.of(context).pushAndRemoveUntil(
                   MaterialPageRoute<LoginScreen>(
-                      builder: (BuildContext ctx) => LoginScreen()),
+                    builder: (BuildContext ctx) => LoginScreen(),
+                  ),
                   (Route<dynamic> route) => false);
               Get.snackbar(
                 'title',
@@ -81,7 +82,7 @@ class WeatherReport extends StatelessWidget {
             textCancel: 'Cancel',
             cancelTextColor: kwhite,
             onCancel: () {
-              Get.offAll(() => const WeatherReport());
+              Get.back();
             },
             barrierDismissible: false,
           );

@@ -39,14 +39,14 @@ class Formwidget extends StatelessWidget {
             children: <Widget>[
               kheight20,
               TextFormWidget(
-                hintText: 'Enter First Name',
+                hintText: 'First Name',
                 prefixIcon: Icons.person,
                 controller: nameController,
               ),
               kheight,
               TextFormWidget(
-                prefixIcon: Icons.numbers,
-                hintText: 'Enter Second Name',
+                prefixIcon: Icons.account_box,
+                hintText: 'Last Name',
                 controller: secondController,
               ),
               kheight,
