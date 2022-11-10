@@ -58,7 +58,7 @@ class SplashScreen extends StatelessWidget {
     if (logedin == null || logedin == false) {
       login();
     } else {
-      Get.to(() => HomeScreen());
+      Get.off(() =>const HomeScreen());
     }
   }
 

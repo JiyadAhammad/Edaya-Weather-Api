@@ -1,12 +1,16 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../constant/color/colors.dart';
 import '../constant/sizedbox/sizedbox.dart';
+import '../login/login_screen.dart';
+import '../widget/custom_app_bar.dart';
 import 'widget/main_container_widget.dart';
 import 'widget/weather_details_widget.dart';
 
@@ -19,6 +23,71 @@ class WeatherReport extends StatelessWidget {
     final double height = MediaQuery.of(context).size.height;
     return Scaffold(
       extendBodyBehindAppBar: true,
+      appBar: CustomAppBar(
+        title: 'WeatherReport',
+        action: () {
+          Get.defaultDialog(
+            title: 'Alert!!',
+            titleStyle: const TextStyle(
+              fontSize: 25,
+              color: kred,
+            ),
+            middleText: 'Do you want toExit',
+            middleTextStyle: const TextStyle(
+              fontSize: 20,
+              color: kwhite,
+            ),
+            backgroundColor: kblack,
+            textConfirm: 'Ok',
+            confirmTextColor: kblack,
+            onConfirm: () async {
+              final SharedPreferences sharedpreferen =
+                  await SharedPreferences.getInstance();
+              await sharedpreferen.clear();
+              // ignore: use_build_context_synchronously
+              Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute<LoginScreen>(
+                      builder: (BuildContext ctx) => LoginScreen()),
+                  (Route<dynamic> route) => false);
+              Get.snackbar(
+                'title',
+                'message',
+                titleText: const Center(
+                  child: Text(
+                    'Success',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: kred,
+                    ),
+                  ),
+                ),
+                messageText: const Center(
+                  child: Text(
+                    'Sign Out Successfully',
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: kwhite,
+                    ),
+                  ),
+                ),
+                snackPosition: SnackPosition.BOTTOM,
+                backgroundColor: kblack,
+                colorText: kwhite,
+                maxWidth: 250,
+                margin: const EdgeInsets.only(bottom: 15),
+              );
+            },
+            buttonColor: kwhite,
+            textCancel: 'Cancel',
+            cancelTextColor: kwhite,
+            onCancel: () {
+              Get.offAll(() => const WeatherReport());
+            },
+            barrierDismissible: false,
+          );
+        },
+        icon: Icons.exit_to_app,
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -65,7 +134,7 @@ class NextDayWeatherWidget extends StatelessWidget {
       child: Stack(
         children: <Widget>[
           Container(
-            height: height * 0.46,
+            height: 400,
             width: width,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(25),
@@ -81,6 +150,7 @@ class NextDayWeatherWidget extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
+              kheight,
               const MainHeadWidget(
                 head: 'Next Days',
                 color: kblack,
@@ -94,10 +164,10 @@ class NextDayWeatherWidget extends StatelessWidget {
                 child: SizedBox(
                   height: height / 2.5,
                   child: ListView.separated(
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     itemCount: 5,
                     separatorBuilder: (BuildContext context, int index) {
-                      return Divider(
+                      return const Divider(
                         thickness: 2,
                       );
                     },
@@ -105,9 +175,9 @@ class NextDayWeatherWidget extends StatelessWidget {
                       return Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          Text('saturday'),
+                          const Text('saturday'),
                           Image.asset('asset/image/icons8-sun-48.png'),
-                          Text('31 °C'),
+                          const Text('31 °C'),
                         ],
                       );
                     },
@@ -189,9 +259,9 @@ class TodayWeatherWidget extends StatelessWidget {
 
 class WeatheDetailcardWidget extends StatelessWidget {
   const WeatheDetailcardWidget({
-    Key? key,
+    super.key,
     required this.width,
-  }) : super(key: key);
+  });
 
   final double width;
 
@@ -212,14 +282,14 @@ class WeatheDetailcardWidget extends StatelessWidget {
               height: 100,
               width: 100,
               decoration: BoxDecoration(
-                image: DecorationImage(
+                image: const DecorationImage(
                   image: AssetImage('asset/image/images.jpeg'),
                   fit: BoxFit.cover,
                 ),
                 color: Colors.primaries[index][300],
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Card(
+              child: const Card(
                 color: ktransparent,
                 elevation: 2,
                 shape: RoundedRectangleBorder(
