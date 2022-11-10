@@ -4,18 +4,15 @@ import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:lottie/lottie.dart';
 
-import '../../domain/user/user.dart';
+import '../../core/user/user.dart';
 import '../../main.dart';
 import '../constant/color/colors.dart';
 import '../formlist/form_list.dart';
 import '../weatherreport/weather_report.dart';
 import '../widget/custom_app_bar.dart';
-import 'widget/delete_alert_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-
-  // final StudentController studentController = Get.put(StudentController());
 
   @override
   Widget build(BuildContext context) {
@@ -109,17 +106,12 @@ class HomeScreen extends StatelessWidget {
                               );
                             },
                             title: Text(
-                              '${data!.firstName}' ' ${data.secondName}',
+                              '${data!.firstName}  ${data.secondName}',
                               style: const TextStyle(color: kblackText),
                             ),
                             subtitle: Text(
                               '${data.email}',
                               style: const TextStyle(color: kgrey),
-                            ),
-                            trailing: DeleteAlertWidget(
-                              id: data.id,
-                              index: index,
-                              data: data,
                             ),
                           ),
                         ),

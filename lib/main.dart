@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/adapters.dart';
 
-import 'domain/user/user.dart';
+import 'core/user/user.dart';
 import 'presentation/constant/color/colors.dart';
 import 'presentation/splash/splash_screen.dart';
 
