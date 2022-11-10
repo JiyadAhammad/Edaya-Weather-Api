@@ -25,17 +25,15 @@ class TextFormWidget extends StatelessWidget {
       decoration: InputDecoration(
         prefixIcon: Icon(prefixIcon),
         hintText: hintText,
-        // errorText: 'Invalid',
         border: const OutlineInputBorder(
           borderRadius: BorderRadius.all(
             Radius.circular(10),
           ),
         ),
       ),
-      // validator: validator,
       inputFormatters: inputFormatters,
       validator: (String? value) {
-        if (value == null) {
+        if (value!.isEmpty) {
           return 'Field Cannot be Empty';
         }
         return null;

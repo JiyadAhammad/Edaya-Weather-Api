@@ -1,6 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../domain/user/user.dart';
+import '../../main.dart';
 import '../constant/color/colors.dart';
 import '../constant/sizedbox/sizedbox.dart';
 import '../home/home_screen.dart';
@@ -21,7 +25,11 @@ class Formwidget extends StatelessWidget {
       appBar: CustomAppBar(
         title: 'Add Details',
         icon: Icons.clear_outlined, // clear all Field
-        action: () {},
+        action: () {
+          nameController.clear();
+          secondController.clear();
+          emailController.clear();
+        },
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
@@ -60,9 +68,13 @@ class Formwidget extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {
-                        // Get.offAll(
-                        //   () => const HomeScreen(),
-                        // );
+                        Get.to(
+                          () => const HomeScreen(),
+                          transition: Transition.fade,
+                          duration: const Duration(
+                            milliseconds: 1500,
+                          ),
+                        );
                       },
                       child: const Text(
                         'Cancel',
@@ -79,8 +91,7 @@ class Formwidget extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {
-                        // okButtonClicked();
-                        // controller.update();
+                        okButtonClicked();
                       },
                       child: const Text(
                         'ok',
@@ -94,5 +105,86 @@ class Formwidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> okButtonClicked() async {
+    final String fName = nameController.text.trim();
+    final String sName = secondController.text.trim();
+    final String email = emailController.text.trim();
+    if (fName.isEmpty || sName.isEmpty || email.isEmpty) {
+      Get.snackbar(
+        'Warning',
+        'All Field are Required',
+        titleText: const Center(
+          child: Text(
+            'Warning',
+            style: TextStyle(
+              fontSize: 20,
+              color: kred,
+            ),
+          ),
+        ),
+        messageText: const Center(
+          child: Text(
+            'All Field are Required',
+            style: TextStyle(
+              fontSize: 18,
+              color: kwhite,
+            ),
+          ),
+        ),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: kblack,
+        colorText: kwhite,
+        maxWidth: 250,
+        margin: const EdgeInsets.only(bottom: 15),
+      );
+    } else {
+      final UserModel userDetails = UserModel(
+        firstName: fName,
+        secondName: sName,
+        email: email,
+      );
+      Get.offAll(() => const HomeScreen());
+      Get.snackbar(
+        'title',
+        'message',
+        titleText: const Center(
+          child: Text(
+            'Success',
+            style: TextStyle(
+              fontSize: 20,
+              color: kgreen,
+            ),
+          ),
+        ),
+        messageText: const Center(
+          child: Text(
+            'Successfully Added',
+            style: TextStyle(
+              fontSize: 18,
+              color: kwhite,
+            ),
+          ),
+        ),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: kblack,
+        colorText: kwhite,
+        maxWidth: 250,
+        margin: const EdgeInsets.only(bottom: 15),
+      );
+      nameController.clear();
+      secondController.clear();
+      emailController.clear();
+
+      final int id = await userDb.add(userDetails);
+      final UserModel userModel = UserModel(
+        id: id,
+        firstName: userDetails.firstName,
+        secondName: userDetails.secondName,
+        email: userDetails.email,
+      );
+      await userDb.put(id, userModel);
+    }
   }
 }
