@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 import '../../core/user/user.dart';
 import '../../main.dart';
 import '../constant/color/colors.dart';

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../main.dart';
@@ -17,7 +18,7 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    loggedIn();
+    splashFetch();
     return Scaffold(
       body: Container(
         decoration: backgrounColor(),
@@ -51,6 +52,34 @@ class SplashScreen extends StatelessWidget {
     );
   }
 
+  Future<void> splashFetch() async {
+    if (await _requestPermission(Permission.location)) {
+      loggedIn();
+    } else {
+      splashFetch();
+    }
+  }
+
+  Future<bool> _requestPermission(Permission isPermission) async {
+    const Permission store = Permission.locationAlways;
+    const Permission access = Permission.locationWhenInUse;
+
+    if (await isPermission.isGranted) {
+      await access.isGranted && await store.isGranted;
+      return true;
+    } else {
+      final PermissionStatus result = await store.request();
+      final PermissionStatus oneresult = await access.request();
+
+      if (result == PermissionStatus.limited &&
+          oneresult == PermissionStatus.limited) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+
   Future<void> loggedIn() async {
     final SharedPreferences sharedpreferen =
         await SharedPreferences.getInstance();
@@ -58,7 +87,7 @@ class SplashScreen extends StatelessWidget {
     if (logedin == null || logedin == false) {
       login();
     } else {
-      Get.off(() =>const HomeScreen());
+      Get.off(() => const HomeScreen());
     }
   }
 

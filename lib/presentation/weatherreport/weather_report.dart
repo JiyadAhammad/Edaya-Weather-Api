@@ -1,18 +1,23 @@
 import 'dart:math';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../application/weatherreport/weather_report_bloc.dart';
+import '../../domain/weather/model/weather_repot_hourly/weather_repot_hourly.dart';
 import '../constant/color/colors.dart';
 import '../constant/sizedbox/sizedbox.dart';
 import '../login/login_screen.dart';
 import '../widget/custom_app_bar.dart';
 import 'widget/main_container_widget.dart';
 import 'widget/weather_details_widget.dart';
+import 'widget/weather_sample_detail_card.dart';
 
 class WeatherReport extends StatelessWidget {
   const WeatherReport({super.key});
@@ -258,58 +263,6 @@ class TodayWeatherWidget extends StatelessWidget {
   }
 }
 
-class WeatheDetailcardWidget extends StatelessWidget {
-  const WeatheDetailcardWidget({
-    super.key,
-    required this.width,
-  });
-
-  final double width;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: width * .4,
-      width: double.infinity,
-      child: ListView.builder(
-        physics: const BouncingScrollPhysics(),
-        shrinkWrap: true,
-        scrollDirection: Axis.horizontal,
-        itemCount: 6,
-        itemBuilder: (BuildContext context, int index) {
-          return Padding(
-            padding: const EdgeInsets.only(left: 10),
-            child: Container(
-              height: 100,
-              width: 100,
-              decoration: BoxDecoration(
-                image: const DecorationImage(
-                  image: AssetImage('asset/image/images.jpeg'),
-                  fit: BoxFit.cover,
-                ),
-                color: Colors.primaries[index][300],
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: const Card(
-                color: ktransparent,
-                elevation: 2,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                ),
-                child: WeatherDetailsWidget(
-                  content: 'khdfjl',
-                  value: 'dfsksjl',
-                ),
-              ),
-            ),
-          );
-        },
-      ),
-    );
-  }
-}
 
 class MainHeadWidget extends StatelessWidget {
   const MainHeadWidget({
