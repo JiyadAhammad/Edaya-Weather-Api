@@ -6,7 +6,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
 
 import '../constant/color/colors.dart';
-import '../weatherreport/weather_report.dart';
 import '../login/login_screen.dart';
 import 'widget/onboarding_container.dart';
 
@@ -41,35 +40,35 @@ class _OnBoardingScreen extends State<OnBoardingScreen> {
   List<ItemData> data = <ItemData>[
     ItemData(
       Colors.blue,
-      'asset/image/icons8-rainbow-48.png',
+      'asset/image/onboardingimg1.jpg',
       'Hi',
       "It's Me",
       'JIYAD',
     ),
     ItemData(
       Colors.cyan,
-      'asset/image/icons8-rainbow-48.png',
+      'asset/image/onboardingimg2.jpg',
       'Take a',
       'Look At',
-      'Liquid Swipe',
+      'New App',
     ),
     ItemData(
       Colors.green,
-      'asset/image/icons8-rainbow-48.png',
+      'asset/image/onboardingimg3.jpg',
       'Liked?',
       'Fork!',
-      'Give Star!',
+      'Enjoyed!',
     ),
     ItemData(
       Colors.yellow,
-      'asset/image/icons8-rainbow-48.png',
+      'asset/image/onboardingimg4.jpg',
       'Can be',
       'Used for',
-      'Onboarding design',
+      'intoducing',
     ),
     ItemData(
       Colors.red,
-      'asset/image/icons8-cloud-lightning-48.png',
+      'asset/image/onboardingimg5.jpg',
       'Do',
       'try it',
       'Thank you',

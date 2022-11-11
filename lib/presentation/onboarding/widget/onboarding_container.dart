@@ -23,7 +23,7 @@ class OnBoardingContainerWidget extends StatelessWidget {
         children: <Widget>[
           Image.asset(
             data[index].image,
-            height: 200,
+            height: 400,
             fit: BoxFit.contain,
           ),
           const Padding(

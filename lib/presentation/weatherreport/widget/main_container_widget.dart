@@ -65,7 +65,7 @@ class MainDeatilContinerWidget extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 Text(
-                  'Asia/Kolkata',
+                  'Ernakulam',
                   style: GoogleFonts.poppins(
                     color: kwhite,
                     fontSize: 30,
@@ -96,7 +96,7 @@ class MainDeatilContinerWidget extends StatelessWidget {
                   width: 100,
                 ),
                 Text(
-                  '{data.weather![1]}',
+                  '${data.weather![0].main}',
                   style: GoogleFonts.poppins(
                     color: kwhite,
                     fontWeight: FontWeight.bold,
@@ -132,7 +132,8 @@ class MainDeatilContinerWidget extends StatelessWidget {
                       source: 'wind dir',
                     ),
                   ],
-                )
+                ),
+                
               ],
             ),
           );

@@ -18,8 +18,6 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: kblack,
-      // backgroundColor: kwhite,
       appBar: CustomAppBar(
         title: 'EDAYA',
         action: () {

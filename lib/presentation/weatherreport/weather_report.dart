@@ -113,7 +113,8 @@ class WeatherReport extends StatelessWidget {
               const MainHeadWidget(head: 'Today'),
               kheight5,
               TodayWeatherWidget(width: width),
-              NextDayWeatherWidget(height: height, width: width)
+              kheight20,
+              // NextDayWeatherWidget(height: height, width: width)
             ],
           ),
         ),
