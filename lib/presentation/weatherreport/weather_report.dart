@@ -16,6 +16,8 @@ import '../constant/sizedbox/sizedbox.dart';
 import '../login/login_screen.dart';
 import '../widget/custom_app_bar.dart';
 import 'widget/main_container_widget.dart';
+import 'widget/nextday_weather.dart';
+import 'widget/today_weather.dart';
 import 'widget/weather_details_widget.dart';
 import 'widget/weather_sample_detail_card.dart';
 
@@ -119,150 +121,6 @@ class WeatherReport extends StatelessWidget {
     );
   }
 }
-
-class NextDayWeatherWidget extends StatelessWidget {
-  const NextDayWeatherWidget({
-    super.key,
-    required this.height,
-    required this.width,
-  });
-
-  final double height;
-  final double width;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 15,
-        vertical: 20,
-      ),
-      child: Stack(
-        children: <Widget>[
-          Container(
-            height: 400,
-            width: width,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(25),
-              color: Colors.blue[300],
-            ),
-            child: Lottie.asset(
-              'asset/lottie/102873-clouds-loop (2).json',
-              alignment: Alignment.topCenter,
-              width: 1,
-              height: 1,
-            ),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              kheight,
-              const MainHeadWidget(
-                head: 'Next Days',
-                color: kblack,
-                size: 25,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 15,
-                  vertical: 10,
-                ),
-                child: SizedBox(
-                  height: height / 2.5,
-                  child: ListView.separated(
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: 5,
-                    separatorBuilder: (BuildContext context, int index) {
-                      return const Divider(
-                        thickness: 2,
-                      );
-                    },
-                    itemBuilder: (BuildContext context, int index) {
-                      return Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          const Text('saturday'),
-                          Image.asset('asset/image/icons8-sun-48.png'),
-                          const Text('31 °C'),
-                        ],
-                      );
-                    },
-                  ),
-                ),
-              ),
-            ],
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class TodayWeatherWidget extends StatelessWidget {
-  const TodayWeatherWidget({
-    super.key,
-    required this.width,
-  });
-
-  final double width;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: width * .45,
-      width: double.infinity,
-      child: ListView.builder(
-        physics: const BouncingScrollPhysics(),
-        shrinkWrap: true,
-        scrollDirection: Axis.horizontal,
-        itemCount: 6,
-        itemBuilder: (BuildContext context, int index) {
-          return Padding(
-            padding: const EdgeInsets.only(left: 10),
-            child: Container(
-              height: 100,
-              width: 100,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors
-                    .primaries[Random().nextInt(Colors.primaries.length)][400],
-              ),
-              child: Card(
-                elevation: 0,
-                color: ktransparent,
-                child: Column(
-                  children: <Widget>[
-                    kheight20,
-                    Text(
-                      DateFormat.jm().format(
-                        DateTime.now(),
-                      ),
-                      style: GoogleFonts.poppins(
-                        color: kwhite,
-                        fontSize: 18,
-                      ),
-                    ),
-                    Image.asset('asset/image/icons8-rainbow-48.png'),
-                    kheight,
-                    Text(
-                      '31 °C',
-                      style: GoogleFonts.poppins(
-                        color: kwhite,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 22,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          );
-        },
-      ),
-    );
-  }
-}
-
 
 class MainHeadWidget extends StatelessWidget {
   const MainHeadWidget({

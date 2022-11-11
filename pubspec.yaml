@@ -52,6 +52,7 @@ dependencies:
   liquid_swipe: ^3.0.0
   loading_animation_widget: ^1.2.0+3
   lottie: ^1.4.3
+  particles_flutter: ^0.1.4
   permission_handler: ^10.2.0
   shared_preferences: ^2.0.15
   sleek_circular_slider: ^2.0.1
